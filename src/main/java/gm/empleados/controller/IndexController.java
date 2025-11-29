@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class IndexController {
 
 
     //indica la vista con la que vamos a trabajar "/"
-    @RequestMapping(value="/") // carga el incio
+    @RequestMapping(value="/", method = RequestMethod.GET) // carga el incio
     public String start(ModelMap modelo){ // el parametro modelo es para compartir informacion recuperada de la db atraves del servicio
         //recuperamos la lista de empleados
         List<Empleado> empleadoList = empleadoService.listEmpleados();
