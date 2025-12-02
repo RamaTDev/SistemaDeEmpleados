@@ -9,7 +9,7 @@
   </div>
 
    <div class="container">
-        <form action="/empleados/agregar" modelAttribute="empleadoForma" method="post">
+        <form action="${urlAgregar}" modelAttribute="empleadoForma" method="post">
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre</label>
                 <input type="text" class="form-control" id="nombreEmpleado" name="nombreEmpleado" required="true">
