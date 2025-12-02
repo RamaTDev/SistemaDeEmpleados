@@ -38,4 +38,10 @@ public class IndexController {
         return "index"; //automaticamente se llama a la pagina de index.jsp
     }
 
+
+    @RequestMapping(value="/agregar",method =  RequestMethod.GET)
+    public String mostrarAgregar(){
+        return "agregar"; //llama a agregar.jsp
+    }
+
 }
