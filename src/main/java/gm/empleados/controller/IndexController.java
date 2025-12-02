@@ -63,6 +63,7 @@ public class IndexController {
         return  "redirect:/"; //redirige al path inicial
     }
 
+
     @RequestMapping(value="/editar", method = RequestMethod.GET)
     public String mostrarEditar(@RequestParam int idEmpleado, ModelMap modelo){
 
@@ -73,7 +74,28 @@ public class IndexController {
         modelo.put("empleado",empleado);
         return "editar"; //mostar la pagina editar.jsp
 
+    }
+    @RequestMapping(value = "/editar", method = RequestMethod.POST)
+    public String editar(@ModelAttribute("empleadoForma") Empleado empleado){
+
+        logger.info("Empleado a gurdar: "+empleado);
+
+        //como el id viene distinto de nulo se hace un update
+        empleadoService.saveEmpleado(empleado);
+
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/eliminar", method = RequestMethod.GET)
+    public String eliminar(@RequestParam int idEmpleado){
+
+        Empleado empleado = empleadoService.findEmpleadoById(idEmpleado);
+        logger.info("Empleado a eliminar: "+empleado);
+        empleadoService.deleteEmpleado(empleado);
+        return "redirect:/"; //mostar la pagina editar.jsp
 
     }
+
+
 
 }
