@@ -2,11 +2,13 @@ package gm.empleados.controller;
 
 import gm.empleados.model.Empleado;
 import gm.empleados.service.EmpleadoService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -42,6 +44,22 @@ public class IndexController {
     @RequestMapping(value="/agregar",method =  RequestMethod.GET)
     public String mostrarAgregar(){
         return "agregar"; //llama a agregar.jsp
+    }
+
+    //metodo post
+    @RequestMapping(value="/agregar",method =  RequestMethod.POST)
+    public String agregar(@ModelAttribute("empleadoForma") Empleado empleado){
+        //@ModelAttribute le dice a springboot que el formulario lo trate como un objecto, y aqui lo etamos recibiendo con el nombre "empleadoForma"
+        // y es de tipo empleado
+
+        logger.info("empleado a agregar: "+empleado);
+
+        //spring en el formulario toma name y deben tener el mismo nombre que la clase Empleado
+
+        //guardamos el empleado en la base de datos
+        empleadoService.saveEmpleado(empleado);
+
+        return  "redirect:/"; //redirige al path inicial
     }
 
 }
